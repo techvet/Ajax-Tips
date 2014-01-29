@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Passing an Array to $.when()</title>
+</head>
+<body>
+    <h1>Passing an Array to $.when()</h1>
+    <div id="content">
+        Name: <span id="customerName"></span>
+        <br />
+        Order Count: <span id="orderCount"></span>
+    </div>
+    <script src="Scripts/jquery.min.js"></script>
+    <script src="Scripts/dataService.js"></script>
+    <script>
+        var custId = 1;
+        dataService.getCustomerAndOrders(custId)
+            .done(function(customerData, ordersData) {
+                      //ProcessData and Break point here
+                      var cust = customerData[0];
+                      $('#customerName').html(cust.FirstName + " " + cust.LastName);
+                      $('#orderCount').html(ordersData[0].length);
+                  })
+                  .fail(function(jqXHR, statustext, err) {
+                      alert('Error using .when' + err);
+                  });
+
+        //$.when(dataService.getCustomer(custId),
+        //        dataService.getOrders(custId))
+        //    .done(function(customerData, ordersData) {
+        //        //ProcessData and Break point here
+        //        var cust = customerData[0];
+        //        $('#customerName').html(cust.FirstName + " " + cust.LastName);
+        //        $('#orderCount').html(ordersData[0].length);
+        //        alert('strike');
+        //    })
+        //    .fail(function(jqXHR, statustext, err) {
+        //        alert('Error using .when' + err);
+        //    });
+    </script>
+</body>
+</html>
